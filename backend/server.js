@@ -3,7 +3,7 @@ var cors = require('cors');
 const app = express()
 let bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-//onst router = express.Router();
+
 
 const posts = [
     { message: 'first post' },
@@ -47,23 +47,3 @@ mongoose.connect('mongodb+srv://user:1111@cluster0-olmgj.mongodb.net/Pluralsight
 
 
 app.listen(3000);
-
-
-//function power(base, exponent) {
-   // if(exponent == 0) { // 
-        //return 1
-   // }else {
-        //return base * power(base, exponent - 1) //
-        //return 2 * power(2, 3 - 1) //
-   // }
-//}
-//console.log(power(2,3)) //8
-
-//functio name() {
-    //let m = ''dffsf
-//     function name2() {
-//         let m = 'sdsdsdsd'
-            //return m +1
-//     }
-//    return name2
-// }
