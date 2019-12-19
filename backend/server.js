@@ -19,15 +19,14 @@ app.get('/posts', cors(), (req, res) => {
 
 app.post('/register', cors(), async (req, res) => {
     try {
-        console.log(req.body);
         const userData = req.body;
         let user = new UserData(userData);
+        console.log('new user-', user)
         user.save((err, result) => {
             if (err)
                 console.log('saving user error')
             //res.send(200);
             res.send(result)
-
         })
         //console.log(userData.email, userData.password)
     } catch (error) {
