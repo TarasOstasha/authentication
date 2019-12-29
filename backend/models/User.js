@@ -11,17 +11,18 @@ let userSchema = new mongoose.Schema({
 
 
 
-userSchema.pre('save', function next() {
+userSchema.pre('save', function(next) {
     let user = this
 
     if(!user.isModified('password'))
     return next()
 
-    bcrypt.hash(user.password, null, null, (err, hash)=> {
+    //bcrypt.hash(user.password, null, null, (err, hash)=> { //- previos method
+    bcrypt.hash(user.password, 10, (err, hash)=> {
         if(err) return next(err);
         user.password = hash;
         next();
-    })
+    });
 })
 
 module.exports = mongoose.model('UserData', userSchema)

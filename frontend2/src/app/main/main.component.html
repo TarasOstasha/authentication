@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="register-link">
+        <button class="pull-left" type="button" class="btn btn-primary" routerLink="/users">Users</button>
+
+    <div class="auth">
+        <button *ngIf="!apiService.isAuthentificated" type="button" class="btn btn-primary" routerLink="/login">Login</button>
+        <button *ngIf="!apiService.isAuthentificated" type="button" class="btn btn-primary" routerLink="/register">Register</button>
+        <button *ngIf="apiService.isAuthentificated" type="button" class="btn btn-primary" (click)="apiService.logOut()">LogOut</button>
+    </div>    
+
+    </div>
+</div>
+

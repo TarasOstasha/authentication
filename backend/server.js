@@ -27,16 +27,39 @@ app.use((req, res, next) => {
 //     res.send(posts);
 // })
 
+// function checkAuthentificated(res,req,next) {
+//     if(!req.header('authorization')) 
+//         return res.status(401).send({ message: 'Unauthorized. Missing Auth Header' })
+//     let token = req.header('authorization').split(' ')[1]
+//     let payload = jwt.encode(payload, '123')
+
+//     if(!payload) 
+//         return res.status(401).send({ message: 'Unauthorized. Auth Header Invalid' })
+//     req.userId = payload.sub
+//     next()
+// }
+
+router.get('/test', cors(), async (req, res) => {
+    res.json('ok')
+})
+
 router.post('/register', cors(), async (req, res) => {
     try {
         const userData = req.body;
+        console.log('userData is working !!!!', userData)
+
+        //console.log('register is working userData!!!!', userData)
+
         let user = new UserData(userData);
-        //console.log('new user-', user)
-        user.save((err, result) => {
-            if (err)
-                console.log('saving user error')
-            //res.send(200);
-            res.send(result)
+        console.log('!!!!!new user-', user)
+        user.save((err, newUser) => {
+            if (err) return res.status(500).send({ message: 'Error Saving User' });
+            const payload = { sub: newUser._id }
+            const token = jwt.encode(payload, '123')
+            //then I'm going to have token
+            console.log('token from register', token);
+            //res.sendStatus(200);
+            res.status(200).send({ token }); // actually send token to front end? what's nex step?
         })
     } catch (error) {
         console.log('error', error)
@@ -44,22 +67,25 @@ router.post('/register', cors(), async (req, res) => {
 })
 
 router.post('/login', cors(), async (req, res) => {
-    //console.log('login');
     try {
         const loginData = req.body;
-        //console.log('userData', userData.password);
+        console.log(loginData.email, '-login data')
+
+        //console.log('userData', userData.password, 'user password', user.password);
         const user = await UserData.findOne({ email: loginData.email })  //request to database
-        if (!user)
-            return res.status(401).send({ message: 'email is not invalid' }) // - I don't understand, there was not status Ok from postman, but it should be 200
-            bcrypt.compare(loginData.password, user.password, (err, isMatch) => {
-                if (!isMatch) return res.status(401).send({ message: 'email or password is not invalid' })
-                //I have installed jwt JSON Web Token) encode and decode module for node.js
-                const payload = {}
-                const token = jwt.encode(payload, '123')
-                //then I'm going to have token
-                console.log('token', token);
-                //res.sendStatus(200);
-                res.status(200).send(token); // actually send token to front end? what's nex step?
+        console.log(user, 'USER')
+        if (!user) return res.status(401).send({ message: 'email is not invalid' }) 
+
+        bcrypt.compare(loginData.password, user.password, (err, isMatch) => {
+            console.log('bcrypt is working', isMatch, loginData.password == user.password)
+            if (!isMatch) return res.status(401).send({ message: 'email or password is not invalid' })
+            //I have installed jwt JSON Web Token) encode and decode module for node.js
+            const payload = { sub: user._id }
+            const token = jwt.encode(payload, '123')
+            //then I'm going to have token
+            console.log('token!!!', token);
+            //res.sendStatus(200);
+            res.status(200).send({ token }); // actually send token to front end? what's nex step?
         })
 
 
@@ -72,6 +98,7 @@ router.post('/login', cors(), async (req, res) => {
 
 router.get('/users', cors(), async (req, res) => {
     try {
+        console.log(req.userId)
         const users = await UserData.find({}, '-password -__v') // request to data base 
         res.send(users);
         //the second method how to process users on backend 
@@ -99,6 +126,8 @@ router.get('/user/:id', cors(), async (req, res) => {
 })
 
 
+app.use('/', router);
+
 //Set up default mongoose connection
 
 mongoose.connect('mongodb+srv://user:1111@cluster0-olmgj.mongodb.net/Pluralsight?retryWrites=true&w=majority', { useMongoClients: true }, (err) => {
@@ -107,8 +136,10 @@ mongoose.connect('mongodb+srv://user:1111@cluster0-olmgj.mongodb.net/Pluralsight
 
 
 
-app.listen(5000);
+app.listen(3000);
 
 module.exports = router;
+//module.exports = app;
+
 
 

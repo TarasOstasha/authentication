@@ -1,0 +1,29 @@
+<!-- <form>
+        <input [(ngModel)]="registerData.email" type="text" placeholder="email" name="email">
+        <input [(ngModel)]="registerData.password" type="password" placeholder="password" name="password">
+        <button (click)="post()">Register</button>
+    </form> -->
+<app-main></app-main>
+<form id="loginForm">
+    <label>
+        <p class="label-txt">ENTER YOUR EMAIL</p>
+        <input [(ngModel)]="loginData.email"  type="text" name="email" class="input" [value]="searchValue">
+        <div class="line-box">
+            <div class="line"></div>
+        </div>
+    </label>
+
+    <label>
+        <p class="label-txt">ENTER YOUR PASSWORD</p>
+        <input [(ngModel)]="loginData.password"  type="password" name="password"
+            class="input" required>
+        <div class="line-box">
+            <div class="line"></div>
+        </div>
+    </label>
+    <div class="btn-wrapper">
+        <button (click)="login()">submit</button>
+        <button type="submit" routerLink="/register">register</button>
+    </div>
+</form>
+<mat-slider min="1" max="100" step="1" value="1">SLIDER</mat-slider>

@@ -1,0 +1,38 @@
+<!-- <form>
+    <input [(ngModel)]="registerData.email" type="text" placeholder="email" name="email">
+    <input [(ngModel)]="registerData.password" type="password" placeholder="password" name="password">
+    <button (click)="post()">Register</button>
+</form> -->
+<app-main></app-main>
+<form [formGroup]="userForm">
+    <h4 class="register-title input">Register New User</h4>
+    <label>
+        <p class="label-txt">ENTER YOUR NAME</p>
+        <!-- <input [(ngModel)]="registerData.name" type="text" name="name" class="input" formControlName="name"> -->
+        <input type="text" name="name" class="input" formControlName="name">
+        <div class="line-box">
+            <div class="line"></div>
+        </div>
+    </label>
+    <label>
+        <p class="label-txt">ENTER YOUR EMAIL</p>
+        <!-- <input [(ngModel)]="registerData.email"  type="text" name="email" class="input" formControlName="email"> -->
+        <input type="text" name="email" class="input" formControlName="email">        
+        <div class="line-box">
+            <div class="line"></div>
+        </div>
+    </label>
+
+    <label>
+        <p class="label-txt">ENTER YOUR PASSWORD</p>
+        <!-- <input [(ngModel)]="registerData.password"  type="password" name="password" class="input" formControlName="password"> -->
+        <input type="password" name="password" class="input" formControlName="password">        
+        <div class="line-box">
+            <div class="line"></div>
+        </div>
+    </label>
+    <div class="btn-wrapper">
+        <button (click)="registerUser()" >submit</button>
+        <button type="submit" routerLink="/login">login</button>
+    </div>
+</form>

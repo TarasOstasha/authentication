@@ -1,0 +1,57 @@
+<app-main></app-main>
+<h1>Users</h1>
+<!-- <ul class="card"> -->
+    <!-- <li *ngFor="let user of users">{{user.name}}</li> -->
+    <!-- <li [routerLink]="['/profile', user._id]" *ngFor="let user of users">{{ user.email }} {{ user.name }}</li> -->
+
+<!-- </ul> -->
+
+<!-- <div class="card" *ngFor="let user of users">
+    <div style="cursor:pointer" [routerLink]="['/profile', user._id]" class="show-card">{{ user.name }}</div>
+</div> -->
+
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+<section class="container">
+    <div class="row active-with-click" >
+        <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let user of users" >
+            <article class="material-card Red" style="cursor:pointer" [routerLink]="['/profile', user._id]">
+                <h2>
+                    <strong >
+                        
+                        <i class="fas fa-user"></i>
+                        {{ user.name }}
+                    </strong>
+                    <strong>
+                        <i class="fa fa-envelope-open"></i>
+                        {{ user.email }} user id - {{ user._id }}
+                    </strong>
+                </h2>
+                <div class="mc-content">
+                    <div class="img-container">
+                        <img class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4UXD_cnoajTnoxMc37_eS1_ya0zZQ4GopwFr21qn6vMCzlg3S&s">
+                    </div>
+                    <div class="mc-description">
+                        
+                    </div>
+                </div>
+                <a class="mc-btn-action">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <div class="mc-footer">
+                    <h4>
+                        Social
+                    </h4>
+                    <a target=_parent href="https://www.wpdownloadmanager.com/" class="fa fa-fw fa-facebook"></a>
+                    <a target=_parent href="https://www.wpdownloadmanager.com/"  class="fa fa-fw fa-twitter"></a>
+                    <a target=_parent href="https://www.wpdownloadmanager.com/"  class="fa fa-fw fa-linkedin"></a>
+                    <a target=_parent href="https://www.wpdownloadmanager.com/"  class="fa fa-fw fa-google-plus"></a>
+                </div>
+            </article>
+        </div>
+        
+    </div>
+</section>
+ 
